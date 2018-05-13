@@ -5,10 +5,10 @@ use yii\base\Model;
 use yii\helpers\Html;
 
 /**
- * Created by PhpStorm.
- * User: fuliang
- * Date: 2018/5/13
- * Time: 21:25
+ * æƒé™ç®¡ç†è¡¨å•æ¨¡åž‹
+ * @author fuliang
+ * @email fuliang19890908@163.com
+ * @date 2018-05-13
  */
 class NodeForm extends Model
 {
@@ -19,9 +19,9 @@ class NodeForm extends Model
     public function rules(){
         return [
             [['name','parent'],'string','max'=>20],
-            [['name','description'],'required','message'=>'nameÊôÐÔ²»ÄÜÎª¿Õ'],
-            ['name','match','pattern'=>'/^[a-z][a-z-_]{2,20}$/','message'=>'nameÊôÐÔ²»ºÏ·¨'],
-            ['parent','match','pattern'=>'/^[a-z-_][a-z-_]{2,20}$/','message'=>'parentÊôÐÔ²»ºÏ·¨'],
+            [['name','description'],'required','message'=>'nameå±žæ€§ä¸èƒ½ä¸ºç©º'],
+            ['name','match','pattern'=>'/^[a-z][a-z-_]{2,20}$/','message'=>'nameå±žæ€§ä¸åˆæ³•'],
+            ['parent','match','pattern'=>'/^[a-z-_][a-z-_]{2,20}$/','message'=>'parentå±žæ€§ä¸åˆæ³•'],
             ['parent','validateParent'],
             ['description','filter','filter'=>function($value){
                 return Html::encode($value);
@@ -34,16 +34,16 @@ class NodeForm extends Model
             $authManager = Yii::$app->authManager;
             $node = $authManager->getPermission($this->parent);
             if(empty($node)){
-                $this->addError($attribute,'ÉÏ¼¶½Úµã²»´æÔÚ');
+                $this->addError($attribute,'ä¸Šçº§èŠ‚ç‚¹ä¸å­˜åœ¨');
             }
         }
     }
 
     public function attributeLabels(){
         return [
-            'name'=>'½ÚµãÃû³Æ',
-            'description'=>'½ÚµãÃèÊö',
-            'parent'=>'¸¸¼¶½Úµã',
+            'name'=>'èŠ‚ç‚¹åç§°',
+            'description'=>'èŠ‚ç‚¹æè¿°',
+            'parent'=>'çˆ¶çº§èŠ‚ç‚¹',
         ];
     }
 

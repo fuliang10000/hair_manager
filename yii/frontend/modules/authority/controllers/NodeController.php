@@ -1,10 +1,10 @@
 <?php
-namespace frontend\modules\community\controllers;
+namespace frontend\modules\authority\controllers;
 use frontend\controllers\BaseController;
 use common\models\NodeForm;
 
 /**
- * È¨ÏÞ½Úµã¹ÜÀí¿ØÖÆÆ÷
+ * æƒé™èŠ‚ç‚¹ç®¡ç†æŽ§åˆ¶å™¨
  * @author fuliang
  * @email fuliang19890908@163.com
  * @date 2018-05-13
@@ -12,7 +12,7 @@ use common\models\NodeForm;
 
 class NodeController extends BaseController
 {
-    #È¨ÏÞ¹ÜÀíÊ×Ò³
+    #æƒé™ç®¡ç†é¦–é¡µ
     public function actionIndex(){
         $authManager = \Yii::$app->authManager;
         $nodes = $authManager->getPermissions();
@@ -21,26 +21,26 @@ class NodeController extends BaseController
             'nodes'=>$nodes,
         ]);
     }
-    #´´½¨È¨ÏÞ
+    #åˆ›å»ºæƒé™
     public function actionCreate(){
         $model = new NodeForm();
 
         if($model->load(\Yii::$app->request->post()) && $model->save()){
-            \Yii::$app->session->setFlash('success','½Úµã['.$model->name.']Ìí¼Ó³É¹¦');
-            return $this->redirect(['/node/index']);
+            \Yii::$app->session->setFlash('success','èŠ‚ç‚¹['.$model->name.']æ·»åŠ æˆåŠŸ');
+            return $this->redirect(['/authority/node/index']);
         }else{
             return $this->render('create',[
                 'model'=>$model,
             ]);
         }
     }
-    #¸üÐÂÈ¨ÏÞ
+    #æ›´æ–°æƒé™
     public function actionUpdate($name){
         $authManager = \Yii::$app->authManager;
         $child = $authManager->getChildren($name);
         if($child){
-            \Yii::$app->session->setFlash('success','½Úµã['.$name.']ÓÐ×Ó½Úµã,²»ÄÜÐÞ¸Ä');
-            return $this->redirect(['/node/index']);
+            \Yii::$app->session->setFlash('success','èŠ‚ç‚¹['.$name.']æœ‰å­èŠ‚ç‚¹,ä¸èƒ½ä¿®æ”¹');
+            return $this->redirect(['/authority/node/index']);
         }
 
         $node = $authManager->getPermission($name);
@@ -50,29 +50,29 @@ class NodeController extends BaseController
         $model->description = $node->description;
 
         if($model->load(\Yii::$app->request->post()) && $model->update($name)){
-            \Yii::$app->session->setFlash('success','½Úµã['.$name.']ÐÞ¸Ä³É¹¦');
-            return $this->redirect(['/node/index']);
+            \Yii::$app->session->setFlash('success','èŠ‚ç‚¹['.$name.']ä¿®æ”¹æˆåŠŸ');
+            return $this->redirect(['/authority/node/index']);
         }else{
             return $this->render('update',[
                 'model'=>$model,
             ]);
         }
     }
-    #É¾³ýÈ¨ÏÞ
+    #åˆ é™¤æƒé™
     public function actionDelete($name){
         $authManager = \Yii::$app->authManager;
         $child = $authManager->getChildren($name);
         if($child){
-            \Yii::$app->session->setFlash('success','½Úµã['.$name.']ÓÐ×Ó½Úµã,²»ÄÜÉ¾³ý');
-            return $this->redirect(['/node/index']);
+            \Yii::$app->session->setFlash('success','èŠ‚ç‚¹['.$name.']æœ‰å­èŠ‚ç‚¹,ä¸èƒ½åˆ é™¤');
+            return $this->redirect(['/authority/node/index']);
         }
         $node = $authManager->getPermission($name);
         if(!$node) return false;
         if($authManager->remove($node)){
-            \Yii::$app->session->setFlash('success','½Úµã['.$name.']É¾³ý³É¹¦');
+            \Yii::$app->session->setFlash('success','èŠ‚ç‚¹['.$name.']åˆ é™¤æˆåŠŸ');
         }else{
-            \Yii::$app->session->setFlash('error','½Úµã['.$name.']É¾³ýÊ§°Ü');
+            \Yii::$app->session->setFlash('error','èŠ‚ç‚¹['.$name.']åˆ é™¤å¤±è´¥');
         }
-        return $this->redirect(['/node/index']);
+        return $this->redirect(['/authority/node/index']);
     }
 }

@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    // Ä£¿éÁÐ±í
+    // æ¨¡å—åˆ—è¡¨
     'modules' => [
         'authority' => [
             'class' => 'frontend\modules\authority\Module',
