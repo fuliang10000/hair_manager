@@ -48,6 +48,10 @@ return [
 //            'rules' => [
 //            ],
 //        ],
+        //打破缓存
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
     ],
     'params' => $params,
 ];
