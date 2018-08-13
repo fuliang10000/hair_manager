@@ -29,6 +29,12 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
+            'class' => 'yii\redis\Session',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -42,15 +48,31 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        //开启url美化
 //        'urlManager' => [
 //            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//            'rules' => [
-//            ],
+//            'showScriptName' => true,
+//            'rules' => [],
 //        ],
         //打破缓存
         'assetManager' => [
             'appendTimestamp' => true,
+        ],
+        //redis配置
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
+        'cache' => [
+            // 'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+            ],
         ],
     ],
     'params' => $params,
